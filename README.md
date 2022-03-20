@@ -39,5 +39,4 @@ ld request v8
 
 Kudos to [tillkruss/alfred-laravel-docs](https://github.com/tillkruss/alfred-laravel-docs) for the initial inspiration.
 
-Built using [Alfred-Workflow](https://github.com/deanishe/alfred-workflow).
 The lightning fast search is powered by [Algolia](https://www.algolia.com) using the same index as the official [Laravel Docs](https://laravel.com/docs/) website.
