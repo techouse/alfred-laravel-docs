@@ -12,6 +12,31 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>DC00B8CA-F431-41AA-BEE6-1ED87A37803E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>DC00B8CA-F431-41AA-BEE6-1ED87A37803E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>576C9A12-1C4F-4FE1-8E3B-A3D387CEDCA4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>D850B7E1-B6F7-4A5E-8EF6-522CBF4E0A21</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>052E1F02-83E0-47EB-BA93-689901829F49</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -32,6 +57,29 @@
 	<string>Laravel Docs</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>./docs -u</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>576C9A12-1C4F-4FE1-8E3B-A3D387CEDCA4</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -60,7 +108,7 @@
 				<key>runningsubtext</key>
 				<string>Fetching the documentation ...</string>
 				<key>script</key>
-				<string>/usr/bin/python docs.py "{query}"</string>
+				<string>./docs -q "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -80,6 +128,36 @@
 			<string>CED3DE72-4DDF-480C-8C3A-18D0811C51ED</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{query}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>update:workflow</string>
+						<key>outputlabel</key>
+						<string>Update Workflow</string>
+						<key>uid</key>
+						<string>D850B7E1-B6F7-4A5E-8EF6-522CBF4E0A21</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Open URL</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>DC00B8CA-F431-41AA-BEE6-1ED87A37803E</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -108,22 +186,36 @@
 		<key>052E1F02-83E0-47EB-BA93-689901829F49</key>
 		<dict>
 			<key>xpos</key>
-			<integer>790</integer>
+			<integer>865</integer>
 			<key>ypos</key>
-			<integer>270</integer>
+			<integer>425</integer>
+		</dict>
+		<key>576C9A12-1C4F-4FE1-8E3B-A3D387CEDCA4</key>
+		<dict>
+			<key>xpos</key>
+			<integer>865</integer>
+			<key>ypos</key>
+			<integer>120</integer>
 		</dict>
 		<key>CED3DE72-4DDF-480C-8C3A-18D0811C51ED</key>
 		<dict>
 			<key>xpos</key>
-			<integer>600</integer>
+			<integer>410</integer>
 			<key>ypos</key>
 			<integer>270</integer>
+		</dict>
+		<key>DC00B8CA-F431-41AA-BEE6-1ED87A37803E</key>
+		<dict>
+			<key>xpos</key>
+			<integer>645</integer>
+			<key>ypos</key>
+			<integer>290</integer>
 		</dict>
 	</dict>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>1.0.0</string>
+	<string>2.0.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/techouse</string>
 </dict>
