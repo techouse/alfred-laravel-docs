@@ -61,7 +61,7 @@ void main(List<String> arguments) async {
     final String version = Config.supportedVersions[versionKey] ??
         Config.supportedVersions.values.last;
 
-    final String queryString = query.join(' ').trim();
+    final String queryString = query.join(' ').trim().toLowerCase();
 
     if (verbose) stdout.writeln('Query: "$queryString"');
 
