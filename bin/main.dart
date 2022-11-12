@@ -13,7 +13,7 @@ import 'package:args/args.dart' show ArgParser, ArgResults;
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:html_unescape/html_unescape.dart' show HtmlUnescape;
 
-import 'src/constants/config.dart' show Config;
+import 'src/env/env.dart';
 import 'src/extensions/string_helpers.dart' show StringHelpers;
 import 'src/models/search_result.dart' show SearchResult;
 import 'src/services/algolia_search.dart' show AlgoliaSearch;
@@ -46,15 +46,15 @@ void main(List<String> arguments) async {
 
     List<String> query =
         args['query'].replaceAll(RegExp(r'\s+'), ' ').trim().split(' ');
-    String? versionKey = query
-        .firstWhereOrNull((el) => Config.supportedVersions.keys.contains(el));
+    String? versionKey =
+        query.firstWhereOrNull((el) => Env.supportedVersions.keys.contains(el));
     if (versionKey != null) {
       query.removeWhere((str) => str == versionKey);
     } else {
-      versionKey = Config.supportedVersions.keys.last;
+      versionKey = Env.supportedVersions.keys.last;
     }
-    final String version = Config.supportedVersions[versionKey] ??
-        Config.supportedVersions.values.last;
+    final String version =
+        Env.supportedVersions[versionKey] ?? Env.supportedVersions.values.last;
 
     final String queryString = query.join(' ').trim().toLowerCase();
 
