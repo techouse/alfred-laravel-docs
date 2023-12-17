@@ -40,11 +40,10 @@ Future<void> _performSearch(String query, {String? version}) async {
     if (searchResponse.nbHits > 0) {
       final AlfredItems items = AlfredItems(
         searchResponse.hits
-            .map((Hit hit) =>
-            SearchResult.fromJson(
+            .map((Hit hit) => SearchResult.fromJson(
                 <String, dynamic>{...hit, 'objectID': hit.objectID}))
             .map(
-              (SearchResult result) {
+          (SearchResult result) {
             final String title = _unescape.convert(result.hierarchy.last);
             final Map<String, String?> hierarchy = result.hierarchy.toJson()
               ..removeWhere((_, value) => value == null || value == title);
@@ -70,7 +69,7 @@ Future<void> _performSearch(String query, {String? version}) async {
       _workflow.addItems(items.items);
     } else {
       final Uri url =
-      Uri.https('www.google.com', '/search', {'q': 'Laravel $query'});
+          Uri.https('www.google.com', '/search', {'q': 'Laravel $query'});
 
       _workflow.addItem(
         AlfredItem(

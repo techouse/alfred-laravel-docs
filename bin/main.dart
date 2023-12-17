@@ -66,7 +66,7 @@ void main(List<String> arguments) {
       if (queryString.isEmpty) {
         _showPlaceholder();
       } else {
-        _workflow.cacheKey = '${queryString}_${version}';
+        _workflow.cacheKey = '${queryString}_$version';
         if (await _workflow.getItems() == null) {
           await _performSearch(queryString, version: version);
         }
