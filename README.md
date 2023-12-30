@@ -24,16 +24,11 @@ ld request
 
 Either press `⌘Y` to Quick Look the result, or press `<enter>` to open it in your web browser.
 
-## Changing Branches
+## Changing the Laravel version to search
 
-The workflow supports searching the documentation of all the currently supported branches: `v10`, `v9`, `v8`, `v7`, `v6`, `v5.8`, `v5.7`, `v5.6`, `v5.5`, `v5.4`, `v5.3`, `v5.2`, `v5.1`, `v5` and `v4.2`.
+The workflow supports searching the documentation of several versions. To change the branch, configure the Workflow as show in the image below.
 
-By default, it searches the `v10` branch. 
-
-To search branch `v9` simply type `v9` **anywhere** in your query, like so:
-```
-ld request v9
-```
+![configure](configure.png)
 
 ### Note
 

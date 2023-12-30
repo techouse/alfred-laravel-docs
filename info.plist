@@ -184,7 +184,11 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>## Usage
+
+Just type `ld` followed by your search query, e.g. `ld request`.
+
+Either press `⌘Y` to Quick Look the result, or press `&lt;enter&gt;` to open it in your web browser.</string>
 	<key>uidata</key>
 	<dict>
 		<key>052E1F02-83E0-47EB-BA93-689901829F49</key>
@@ -217,9 +221,90 @@
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
-	<key>variablesdontexport</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>10.x</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>10.x</string>
+						<string>10.x</string>
+					</array>
+					<array>
+						<string>9.x</string>
+						<string>9.x</string>
+					</array>
+					<array>
+						<string>8.x</string>
+						<string>8.x</string>
+					</array>
+					<array>
+						<string>7.x</string>
+						<string>7.x</string>
+					</array>
+					<array>
+						<string>6.x</string>
+						<string>6.x</string>
+					</array>
+					<array>
+						<string>6</string>
+						<string>6</string>
+					</array>
+					<array>
+						<string>5.8</string>
+						<string>5.8</string>
+					</array>
+					<array>
+						<string>5.7</string>
+						<string>5.7</string>
+					</array>
+					<array>
+						<string>5.6</string>
+						<string>5.6</string>
+					</array>
+					<array>
+						<string>5.5</string>
+						<string>5.5</string>
+					</array>
+					<array>
+						<string>5.4</string>
+						<string>5.4</string>
+					</array>
+					<array>
+						<string>5.3</string>
+						<string>5.3</string>
+					</array>
+					<array>
+						<string>5.2</string>
+						<string>5.2</string>
+					</array>
+					<array>
+						<string>5.1</string>
+						<string>5.1</string>
+					</array>
+					<array>
+						<string>5.0</string>
+						<string>5.0</string>
+					</array>
+					<array>
+						<string>4.2</string>
+						<string>4.2</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>Search the documentation for this version</string>
+			<key>label</key>
+			<string>Laravel version</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>laravel_version</string>
+		</dict>
+	</array>
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>

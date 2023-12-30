@@ -7,12 +7,15 @@ import 'package:alfred_workflow/alfred_workflow.dart'
         AlfredItemText,
         AlfredItems,
         AlfredUpdater,
-        AlfredWorkflow;
+        AlfredUserConfiguration,
+        AlfredUserConfigurationConfig,
+        AlfredUserConfigurationSelect,
+        AlfredWorkflow,
+        UserDefaults;
 import 'package:algoliasearch/src/model/hit.dart';
 import 'package:algoliasearch/src/model/search_response.dart';
 import 'package:args/args.dart' show ArgParser, ArgResults;
 import 'package:cli_script/cli_script.dart';
-import 'package:collection/collection.dart' show IterableExtension;
 import 'package:html_unescape/html_unescape.dart' show HtmlUnescape;
 
 import 'src/env/env.dart';
@@ -47,17 +50,21 @@ void main(List<String> arguments) {
 
       _verbose = args['verbose'];
 
-      List<String> query =
-          args['query'].replaceAll(RegExp(r'\s+'), ' ').trim().split(' ');
-      String? versionKey = query
-          .firstWhereOrNull((el) => Env.supportedVersions.keys.contains(el));
-      if (versionKey != null) {
-        query.removeWhere((str) => str == versionKey);
-      } else {
-        versionKey = Env.supportedVersions.keys.last;
+      final Map<String, AlfredUserConfiguration<AlfredUserConfigurationConfig>>?
+          userDefaults = await _workflow.getUserDefaults();
+
+      final AlfredUserConfigurationSelect? tailwindVersion =
+          userDefaults?['laravel_version'] as AlfredUserConfigurationSelect?;
+
+      if (tailwindVersion == null) {
+        throw Exception('laravel_version not set!');
       }
-      final String version = Env.supportedVersions[versionKey] ??
-          Env.supportedVersions.values.last;
+
+      final List<String> query =
+          args['query'].replaceAll(RegExp(r'\s+'), ' ').trim().split(' ');
+      final String version = tailwindVersion.config.value;
+
+      query.removeWhere((str) => str == version);
 
       final String queryString = query.join(' ').trim().toLowerCase();
 
