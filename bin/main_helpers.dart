@@ -40,45 +40,46 @@ Future<void> _performSearch(String query, {required String version}) async {
     if ((searchResponse.nbHits ?? 0) > 0) {
       final AlfredItems items = AlfredItems(
         searchResponse.hits
-            .map((Hit hit) => SearchResult.fromJson(
-                <String, dynamic>{...hit, 'objectID': hit.objectID}))
             .map(
-          (SearchResult result) {
-            final String title = _unescape.convert(result.hierarchy.last);
-            final Map<String, String?> hierarchy = result.hierarchy.toJson()
-              ..removeWhere((_, value) => value == null || value == title);
+              (Hit hit) => SearchResult.fromJson(<String, dynamic>{
+                ...hit,
+                'objectID': hit.objectID,
+              }),
+            )
+            .map((SearchResult result) {
+              final String title = _unescape.convert(result.hierarchy.last);
+              final Map<String, String?> hierarchy = result.hierarchy.toJson()
+                ..removeWhere((_, value) => value == null || value == title);
 
-            return AlfredItem(
-              uid: result.objectID,
-              title: title,
-              subtitle: hierarchy.isNotEmpty
-                  ? _unescape.convert(hierarchy.values.join(' > ')).truncate(75)
-                  : '',
-              arg: result.url,
-              text: AlfredItemText(
-                largeType: title,
-                copy: result.url,
-              ),
-              quickLookUrl: result.url,
-              icon: AlfredItemIcon(path: 'icon.png'),
-              valid: true,
-            );
-          },
-        ).toList(),
+              return AlfredItem(
+                uid: result.objectID,
+                title: title,
+                subtitle: hierarchy.isNotEmpty
+                    ? _unescape
+                          .convert(hierarchy.values.join(' > '))
+                          .truncate(75)
+                    : '',
+                arg: result.url,
+                text: AlfredItemText(largeType: title, copy: result.url),
+                quickLookUrl: result.url,
+                icon: AlfredItemIcon(path: 'icon.png'),
+                valid: true,
+              );
+            })
+            .toList(),
       );
       _workflow.addItems(items.items);
     } else {
-      final Uri url =
-          Uri.https('www.google.com', '/search', {'q': 'Laravel $query'});
+      final Uri url = Uri.https('www.google.com', '/search', {
+        'q': 'Laravel $query',
+      });
 
       _workflow.addItem(
         AlfredItem(
           title: 'No matching answers found',
           subtitle: 'Shall I try and search Google?',
           arg: url.toString(),
-          text: AlfredItemText(
-            copy: url.toString(),
-          ),
+          text: AlfredItemText(copy: url.toString()),
           quickLookUrl: url.toString(),
           icon: AlfredItemIcon(path: 'google.png'),
           valid: true,

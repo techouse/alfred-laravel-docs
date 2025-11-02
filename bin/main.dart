@@ -40,8 +40,8 @@ void main(List<String> arguments) {
 
       _verbose = args['verbose'];
 
-      final Map<String, AlfredUserConfiguration>? userDefaults =
-          await _workflow.getUserDefaults();
+      final Map<String, AlfredUserConfiguration>? userDefaults = await _workflow
+          .getUserDefaults();
 
       final AlfredUserConfigurationSelect? laravelVersion =
           userDefaults?[UserConfigKey.laravelVersion.toString()]
@@ -67,8 +67,10 @@ void main(List<String> arguments) {
         throw Exception('${UserConfigKey.laravelVersion} not set!');
       }
 
-      final List<String> query =
-          args['query'].replaceAll(RegExp(r'\s+'), ' ').trim().split(' ');
+      final List<String> query = args['query']
+          .replaceAll(RegExp(r'\s+'), ' ')
+          .trim()
+          .split(' ');
 
       query.removeWhere((String str) => str == laravelVersion.value);
 
