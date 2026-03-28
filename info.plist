@@ -226,9 +226,13 @@ Either press `⌘Y` to Quick Look the result, or press `&lt;enter&gt;` to open i
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>12.x</string>
+				<string>13.x</string>
 				<key>pairs</key>
 				<array>
+					<array>
+						<string>13.x</string>
+						<string>13.x</string>
+					</array>
 					<array>
 						<string>12.x</string>
 						<string>12.x</string>
