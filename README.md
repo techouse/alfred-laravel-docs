@@ -35,3 +35,13 @@ The workflow supports searching the documentation of several versions. To change
 Kudos to [tillkruss/alfred-laravel-docs](https://github.com/tillkruss/alfred-laravel-docs) for the initial inspiration.
 
 The lightning fast search is powered by [Algolia](https://www.algolia.com) using the same index as the official [Laravel Docs](https://laravel.com/docs/) website.
+
+## Development
+
+The workflow is implemented in Rust and requires Rust 1.88 or newer. Copy `.env.example` to `.env` and fill in the three Algolia search values, then run a local query with:
+
+```sh
+cargo run -- -q "request"
+```
+
+Configuration precedence is runtime environment, then the explicit working-directory `.env`, then values embedded at build time. Run the complete local check suite with `make ci`. To build the release directory or create an installable workflow for the current architecture, install `cargo-about` with `cargo install cargo-about --locked --features cli`, then run `make build-release` or `make package`. GitHub releases contain one universal binary supporting arm64 macOS 11+ and Intel macOS 10.15+. The `.env` file is never copied into a package.
