@@ -60,14 +60,11 @@ fn empty_dotenv_value_is_rejected() {
 }
 
 #[test]
-fn empty_embedded_value_is_treated_as_missing() {
+fn empty_embedded_value_is_rejected() {
     let error = configuration_value("SETTING", Err(VarError::NotPresent), None, Some(""))
         .expect_err("an empty embedded setting must be rejected");
 
-    assert_eq!(
-        error.to_string(),
-        "SETTING must be set in the environment, .env file, or embedded at build time"
-    );
+    assert_eq!(error.to_string(), "SETTING must not be empty");
 }
 
 #[test]

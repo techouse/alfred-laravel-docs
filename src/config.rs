@@ -71,14 +71,13 @@ pub(crate) fn configuration_value(
         Err(VarError::NotPresent) => match dotenv_value {
             Some("") => Err(anyhow!("{name} must not be empty")),
             Some(value) => Ok(value.to_owned()),
-            None => embedded_value
-                .filter(|value| !value.is_empty())
-                .map(str::to_owned)
-                .ok_or_else(|| {
-                    anyhow!(
-                        "{name} must be set in the environment, .env file, or embedded at build time"
-                    )
-                }),
+            None => match embedded_value {
+                Some("") => Err(anyhow!("{name} must not be empty")),
+                Some(value) => Ok(value.to_owned()),
+                None => Err(anyhow!(
+                    "{name} must be set in the environment, .env file, or embedded at build time"
+                )),
+            },
         },
     }
 }
