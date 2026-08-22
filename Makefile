@@ -90,7 +90,7 @@ package: build-release
 version-check:
 	./scripts/version-check.sh
 
-ci: fmt-check test clippy version-check
+ci: fmt-check test clippy version-check licenses
 
 clean:
 	cargo clean
