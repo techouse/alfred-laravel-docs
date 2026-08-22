@@ -58,6 +58,53 @@ fn item_decodes_html_title_and_breadcrumb() -> Result<()> {
     assert_eq!(items[0].subtitle(), Some("Docs & Guides"));
     Ok(())
 }
+#[test]
+fn item_decodes_semicolonless_entity_in_title_and_large_type() -> Result<()> {
+    let mut item_result = result("lvl1");
+    item_result.hierarchy.lvl1 = Some("Requests &amp Input".to_owned());
+    item_result.hierarchy.lvl2 = None;
+
+    let item = items_from_results(&[item_result])?.remove(0);
+
+    assert_eq!(item.title(), "Requests & Input");
+    assert_eq!(
+        item.text().and_then(|text| text.large_type()),
+        Some("Requests & Input")
+    );
+    assert_eq!(item.subtitle(), Some("Docs & Guides"));
+    Ok(())
+}
+
+#[test]
+fn item_decodes_semicolonless_and_numeric_entities_in_breadcrumb() -> Result<()> {
+    let mut item_result = result("lvl1");
+    item_result.hierarchy.lvl0 = "Guides &copy and &#38; Unknown &doesnotexist;".to_owned();
+    item_result.hierarchy.lvl1 = Some("Title".to_owned());
+    item_result.hierarchy.lvl2 = None;
+
+    let item = items_from_results(&[item_result])?.remove(0);
+
+    assert_eq!(
+        item.subtitle(),
+        Some("Guides © and & Unknown &doesnotexist;")
+    );
+    Ok(())
+}
+#[test]
+fn item_preserves_dart_incompatible_numeric_entities() -> Result<()> {
+    let mut item_result = result("lvl1");
+    item_result.hierarchy.lvl1 = Some("Requests &#38 and &#X26;".to_owned());
+    item_result.hierarchy.lvl2 = None;
+
+    let item = items_from_results(&[item_result])?.remove(0);
+
+    assert_eq!(item.title(), "Requests &#38 and &#X26;");
+    assert_eq!(
+        item.text().and_then(|text| text.large_type()),
+        Some("Requests &#38 and &#X26;")
+    );
+    Ok(())
+}
 
 #[test]
 fn duplicate_title_values_are_removed_from_breadcrumb() -> Result<()> {
